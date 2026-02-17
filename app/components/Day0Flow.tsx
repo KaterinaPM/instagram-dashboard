@@ -40,6 +40,8 @@ export function Day0Flow() {
   const [showGoalOptions, setShowGoalOptions] = useState(false)
   const [showInsights, setShowInsights] = useState(false)
   const [showCurrentSuggestion, setShowCurrentSuggestion] = useState(false)
+  const [showNotificationButtons, setShowNotificationButtons] = useState(true)
+  const [showFinalInput, setShowFinalInput] = useState(false)
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
@@ -49,7 +51,7 @@ export function Day0Flow() {
 
   useEffect(() => {
     scrollToBottom()
-  }, [messages, isTyping, showInput, showGoalOptions, showInsights, showCurrentSuggestion])
+  }, [messages, isTyping, showInput, showGoalOptions, showInsights, showCurrentSuggestion, showFinalInput])
 
   useEffect(() => {
     setMounted(true)
@@ -170,6 +172,7 @@ export function Day0Flow() {
 
   const showSetupComplete = async () => {
     setStep('setup-complete')
+    setShowInsights(false) // Hide insights card when moving to completion
     await showMessagesWithDelay(content.setupComplete.messages)
     await new Promise((resolve) => setTimeout(resolve, 500))
     addMessage(content.setupComplete.notification.question, 'ai')
@@ -179,9 +182,45 @@ export function Day0Flow() {
     const option = content.setupComplete.notification.options.find(opt => opt.id === choice)
     if (option) {
       addMessage(option.label, 'user')
-      await new Promise((resolve) => setTimeout(resolve, 800))
+      setShowNotificationButtons(false) // Hide the buttons
+
+      if (choice === 'yes') {
+        // Show setup summary for "Yes" choice
+        await new Promise((resolve) => setTimeout(resolve, 500))
+        addMessage(content.setupComplete.summaryMessage.text, 'ai')
+
+        // List approved automations
+        await new Promise((resolve) => setTimeout(resolve, 800))
+        const summaryText = approvedGoals.map((goalId) => {
+          const goal = content.goalSuggestions.find(g => g.id === goalId)
+          return goal ? `✓ ${goal.title}` : ''
+        }).filter(Boolean).join('\n')
+
+        if (summaryText) {
+          addMessage(summaryText, 'ai')
+        }
+
+        await new Promise((resolve) => setTimeout(resolve, 800))
+      } else {
+        await new Promise((resolve) => setTimeout(resolve, 800))
+      }
+
       addMessage(content.setupComplete.finalMessage.text, 'ai')
+
+      // Show chat input after final message
+      await new Promise((resolve) => setTimeout(resolve, 500))
+      setShowFinalInput(true)
     }
+  }
+
+  const handleFinalChatSubmit = async (message: string) => {
+    addMessage(message, 'user')
+    // Could add AI response logic here in the future
+    await new Promise((resolve) => setTimeout(resolve, 800))
+    setIsTyping(true)
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    setIsTyping(false)
+    addMessage("I'm here to help! Feel free to ask me anything about your automations.", 'ai')
   }
 
   const currentSuggestion = content.goalSuggestions[currentSuggestionIndex]
@@ -302,7 +341,7 @@ export function Day0Flow() {
                   </div>
                 )}
 
-                {step === 'setup-complete' && !showGoalOptions && !showCurrentSuggestion && (
+                {step === 'setup-complete' && !showGoalOptions && !showCurrentSuggestion && showNotificationButtons && (
                   <div className="flex flex-col gap-2 mt-4 animate-fadeIn">
                     {content.setupComplete.notification.options.map((option) => (
                       <button
@@ -346,6 +385,16 @@ export function Day0Flow() {
                 </svg>
                 {content.onboarding.instagramConnection.button}
               </button>
+            </div>
+          )}
+
+          {showFinalInput && (
+            <div className="px-4 py-3 border-t border-[#3d4757]">
+              <ChatInput
+                placeholder="Ask me anything..."
+                onSubmit={handleFinalChatSubmit}
+                buttonText="Send"
+              />
             </div>
           )}
         </div>

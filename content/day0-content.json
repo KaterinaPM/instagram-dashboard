@@ -319,6 +319,10 @@
         }
       ]
     },
+    "summaryMessage": {
+      "text": "Here's a summary of your setup:",
+      "delay": 500
+    },
     "finalMessage": {
       "text": "Perfect! Your AI is now live and working for you. Talk tomorrow! 👋",
       "delay": 800
