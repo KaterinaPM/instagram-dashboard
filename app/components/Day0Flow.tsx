@@ -27,7 +27,11 @@ interface Message {
   timestamp?: string
 }
 
-export function Day0Flow() {
+interface Day0FlowProps {
+  onExit?: () => void
+}
+
+export function Day0Flow({ onExit }: Day0FlowProps = {}) {
   const [mounted, setMounted] = useState(false)
   const [step, setStep] = useState<Step>('welcome')
   const [messages, setMessages] = useState<Message[]>([])
@@ -228,21 +232,32 @@ export function Day0Flow() {
   // Don't render until mounted to avoid hydration mismatch
   if (!mounted) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="h-[760px] w-[380px] bg-[#2d3645] rounded-[48px] p-3 shadow-2xl">
-          <div className="bg-[#232b39] rounded-[36px] h-full flex flex-col relative overflow-hidden">
-            <div className="flex items-center gap-3 px-4 py-4 border-b border-[#3d4757]">
-              <ManychatLogo className="w-10 h-10" color="#6b4ce6" />
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="h-[760px] w-[380px] bg-muted rounded-[48px] p-3 shadow-2xl">
+          <div className="bg-card rounded-[36px] h-full flex flex-col relative overflow-hidden">
+            <div className="flex items-center gap-3 px-4 py-4 border-b border-border">
+              <ManychatLogo className="w-10 h-10" color="var(--primary)" />
               <div className="flex-1">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-white font-semibold text-sm">Manychat AI</span>
-                  <div className="w-1.5 h-1.5 bg-[#0bcb6b] rounded-full"></div>
+                  <span className="text-card-foreground font-semibold text-sm">Manychat AI</span>
+                  <div className="w-1.5 h-1.5 bg-chart-1 rounded-full"></div>
                 </div>
-                <div className="text-[#8592a3] text-xs">Setting up your account...</div>
+                <div className="text-muted-foreground text-xs">Setting up your account...</div>
               </div>
+              {onExit && (
+                <button
+                  onClick={onExit}
+                  className="text-muted-foreground hover:text-card-foreground transition-colors"
+                  aria-label="Exit chat"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                  </svg>
+                </button>
+              )}
             </div>
             <div className="flex-1 flex items-center justify-center">
-              <ManychatLogo className="w-12 h-12 opacity-20" color="#8592a3" />
+              <ManychatLogo className="w-12 h-12 opacity-20" color="var(--muted-foreground)" />
             </div>
           </div>
         </div>
@@ -251,21 +266,32 @@ export function Day0Flow() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
+    <div className="min-h-screen flex items-center justify-center bg-background">
       {/* Phone Mockup Container */}
-      <div className="h-[760px] w-[380px] bg-[#2d3645] rounded-[48px] p-3 shadow-2xl">
-        <div className="bg-[#232b39] rounded-[36px] h-full flex flex-col relative overflow-hidden">
+      <div className="h-[760px] w-[380px] bg-muted rounded-[48px] p-3 shadow-2xl">
+        <div className="bg-card rounded-[36px] h-full flex flex-col relative overflow-hidden">
 
           {/* Phone Header */}
-          <div className="flex items-center gap-3 px-4 py-4 border-b border-[#3d4757]">
+          <div className="flex items-center gap-3 px-4 py-4 border-b border-border">
             <ManychatLogo className="w-10 h-10" color="#6b4ce6" />
             <div className="flex-1">
               <div className="flex items-center gap-1.5">
                 <span className="text-white font-semibold text-sm">Manychat AI</span>
-                <div className="w-1.5 h-1.5 bg-[#0bcb6b] rounded-full"></div>
+                <div className="w-1.5 h-1.5 bg-chart-1 rounded-full"></div>
               </div>
-              <div className="text-[#8592a3] text-xs">Setting up your account...</div>
+              <div className="text-muted-foreground text-xs">Setting up your account...</div>
             </div>
+            {onExit && (
+              <button
+                onClick={onExit}
+                className="text-muted-foreground hover:text-card-foreground transition-colors"
+                aria-label="Exit chat"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+            )}
           </div>
 
           {/* Chat Area */}
@@ -274,7 +300,7 @@ export function Day0Flow() {
               <div className="h-full flex items-center justify-center">
                 <div className="text-center">
                   <ManychatLogo className="w-12 h-12 mx-auto mb-4 opacity-20" color="#8592a3" />
-                  <p className="text-[#8592a3] text-sm px-8">
+                  <p className="text-muted-foreground text-sm px-8">
                     Ask me anything your followers might ask you
                   </p>
                 </div>
@@ -300,17 +326,17 @@ export function Day0Flow() {
 
                 {showCurrentSuggestion && currentSuggestion && (
                   <div className="animate-fadeIn mt-4">
-                    <div className="bg-[#1e293b] border border-[#334155] rounded-xl p-4">
+                    <div className="bg-muted border border-border rounded-xl p-4">
                       <h3 className="font-semibold text-white text-sm mb-2">
                         {currentSuggestion.title}
                       </h3>
-                      <p className="text-xs text-[#8592a3] mb-3">
+                      <p className="text-xs text-muted-foreground mb-3">
                         {currentSuggestion.description}
                       </p>
                       <div className="space-y-1.5 mb-3">
                         {currentSuggestion.benefits.map((benefit, index) => (
-                          <div key={index} className="flex items-start gap-2 text-xs text-[#cbd5e1]">
-                            <span className="text-[#0bcb6b] mt-0.5">✓</span>
+                          <div key={index} className="flex items-start gap-2 text-xs text-muted-foreground">
+                            <span className="text-chart-1 mt-0.5">✓</span>
                             <span>{benefit}</span>
                           </div>
                         ))}
@@ -347,7 +373,7 @@ export function Day0Flow() {
                       <button
                         key={option.id}
                         onClick={() => handleNotificationChoice(option.id)}
-                        className="w-full bg-[#6b4ce6] text-white px-4 py-2.5 rounded-lg font-medium text-sm hover:bg-[#5a3cc5] transition-colors"
+                        className="w-full bg-primary text-primary-foreground px-4 py-2.5 rounded-lg font-medium text-sm hover:opacity-90 transition-colors"
                       >
                         {option.label}
                       </button>
@@ -362,7 +388,7 @@ export function Day0Flow() {
 
           {/* Input Area */}
           {showInput && step === 'email' && (
-            <div className="px-4 py-3 border-t border-[#3d4757]">
+            <div className="px-4 py-3 border-t border-border">
               <ChatInput
                 placeholder={content.onboarding.emailCollection.placeholder}
                 onSubmit={handleEmailSubmit}
@@ -373,10 +399,10 @@ export function Day0Flow() {
           )}
 
           {step === 'instagram' && (
-            <div className="px-4 py-3 border-t border-[#3d4757]">
+            <div className="px-4 py-3 border-t border-border">
               <button
                 onClick={handleInstagramConnect}
-                className="w-full bg-[#0084ff] text-white px-4 py-2.5 rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                className="w-full bg-primary text-primary-foreground px-4 py-2.5 rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
                   <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="2"/>
@@ -389,7 +415,7 @@ export function Day0Flow() {
           )}
 
           {showFinalInput && (
-            <div className="px-4 py-3 border-t border-[#3d4757]">
+            <div className="px-4 py-3 border-t border-border">
               <ChatInput
                 placeholder="Ask me anything..."
                 onSubmit={handleFinalChatSubmit}

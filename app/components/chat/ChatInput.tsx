@@ -50,15 +50,15 @@ export function ChatInput({
           }}
           placeholder={placeholder}
           disabled={disabled}
-          className="w-full bg-[#2d3645] text-white placeholder:text-[#8592a3] px-3 py-2.5 rounded-lg border border-[#3d4757] focus:outline-none focus:border-[#6b4ce6] transition-colors text-sm caret-white"
+          className="w-full bg-secondary text-secondary-foreground placeholder:text-muted-foreground px-3 py-2.5 rounded-lg border border-border focus:outline-none focus:border-primary focus:ring-2 focus:ring-ring transition-colors text-sm"
         />
         {error && (
-          <p className="text-xs text-red-400 px-1">{error}</p>
+          <p className="text-xs text-destructive px-1">{error}</p>
         )}
         <button
           type="submit"
           disabled={disabled}
-          className="w-full bg-[#0084ff] text-white px-4 py-2.5 rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-primary text-primary-foreground px-4 py-2.5 rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {buttonText}
         </button>

@@ -32,13 +32,13 @@ export function LoadingScreen() {
   }, [currentStep])
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-6 bg-white">
+    <div className="flex flex-col items-center justify-center min-h-screen px-6 bg-background">
       <div className="text-center max-w-[480px]">
         <div className="w-16 h-16 mx-auto mb-8 animate-pulse">
-          <ManychatLogo className="w-full h-full" color="#232B39" />
+          <ManychatLogo className="w-full h-full" color="var(--foreground)" />
         </div>
 
-        <h2 className="text-[28px] font-bold text-[#232b39] mb-12">
+        <h2 className="text-[28px] font-bold text-foreground mb-12">
           Getting your AI ready...
         </h2>
 
@@ -57,7 +57,7 @@ export function LoadingScreen() {
               >
                 <div className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center">
                   {isCompleted ? (
-                    <div className="w-full h-full rounded-full bg-[#0bcb6b] flex items-center justify-center">
+                    <div className="w-full h-full rounded-full bg-chart-1 flex items-center justify-center">
                       <svg
                         className="w-3.5 h-3.5"
                         viewBox="0 0 12 10"
@@ -74,14 +74,14 @@ export function LoadingScreen() {
                       </svg>
                     </div>
                   ) : isActive ? (
-                    <div className="w-full h-full rounded-full bg-[#6b4ce6] animate-pulse" />
+                    <div className="w-full h-full rounded-full bg-primary animate-pulse" />
                   ) : (
-                    <div className="w-full h-full rounded-full border-2 border-[#e1e5ea]" />
+                    <div className="w-full h-full rounded-full border-2 border-border" />
                   )}
                 </div>
                 <div
                   className={`text-base font-medium ${
-                    isVisible ? "text-[#232b39]" : "text-[#8592a3]"
+                    isVisible ? "text-foreground" : "text-muted-foreground"
                   } ${isCompleted ? "font-semibold" : ""}`}
                 >
                   {step.text}

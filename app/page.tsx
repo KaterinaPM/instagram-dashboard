@@ -1,5 +1,5 @@
-import { Day0Flow } from "./components/Day0Flow"
+import { AppContainer } from "./components/AppContainer"
 
 export default function Home() {
-  return <Day0Flow />
+  return <AppContainer />
 }
