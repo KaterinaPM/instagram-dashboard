@@ -1,0 +1,342 @@
+{
+  "onboarding": {
+    "welcome": {
+      "messages": [
+        {
+          "id": "welcome-1",
+          "text": "Hi! 👋 Welcome to Manychat AI!",
+          "delay": 500
+        },
+        {
+          "id": "welcome-2",
+          "text": "I'm your AI assistant, and I'm here to help you automate your Instagram conversations.",
+          "delay": 1000
+        },
+        {
+          "id": "welcome-3",
+          "text": "Let's get you set up in just a few minutes.",
+          "delay": 800
+        }
+      ]
+    },
+    "emailCollection": {
+      "message": "First, what's your email address?",
+      "placeholder": "your@email.com",
+      "button": "Continue",
+      "validation": {
+        "required": "Please enter your email",
+        "invalid": "Please enter a valid email address"
+      }
+    },
+    "instagramConnection": {
+      "messages": [
+        {
+          "id": "ig-1",
+          "text": "Great! Now let's connect your Instagram account.",
+          "delay": 500
+        },
+        {
+          "id": "ig-2",
+          "text": "This will allow me to understand your audience and help you automate responses.",
+          "delay": 800
+        }
+      ],
+      "button": "Connect Instagram",
+      "icon": "instagram"
+    }
+  },
+  "loading": {
+    "steps": [
+      {
+        "id": "scan-bio",
+        "text": "Scanning your Instagram bio...",
+        "duration": 5000
+      },
+      {
+        "id": "scan-posts",
+        "text": "Analyzing your recent posts...",
+        "duration": 5000
+      },
+      {
+        "id": "scan-dms",
+        "text": "Reading your DM history...",
+        "duration": 5000
+      },
+      {
+        "id": "identify-niche",
+        "text": "Identifying your niche...",
+        "duration": 4000
+      },
+      {
+        "id": "analyze-engagement",
+        "text": "Understanding your audience engagement...",
+        "duration": 4000
+      }
+    ],
+    "goalQuestion": {
+      "message": "While I'm learning about you, tell me: What's your main goal?",
+      "options": [
+        {
+          "id": "sell-more",
+          "label": "Sell more",
+          "icon": "💰",
+          "description": "Increase sales and conversions"
+        },
+        {
+          "id": "grow-followers",
+          "label": "Grow your followers",
+          "icon": "📈",
+          "description": "Expand your audience"
+        },
+        {
+          "id": "build-community",
+          "label": "Build my community",
+          "icon": "👥",
+          "description": "Engage and nurture your audience"
+        }
+      ]
+    }
+  },
+  "insights": {
+    "intro": {
+      "messages": [
+        {
+          "id": "insights-1",
+          "text": "Alright! I've learned a lot about your account.",
+          "delay": 500
+        },
+        {
+          "id": "insights-2",
+          "text": "Here's what I found:",
+          "delay": 800
+        }
+      ]
+    },
+    "metrics": [
+      {
+        "id": "followers",
+        "label": "Followers",
+        "value": "12.4K",
+        "icon": "👥"
+      },
+      {
+        "id": "dms-per-week",
+        "label": "DMs per week",
+        "value": "~85",
+        "icon": "💬"
+      },
+      {
+        "id": "business-type",
+        "label": "Business type",
+        "value": "Online Coaching",
+        "icon": "💼"
+      },
+      {
+        "id": "top-post",
+        "label": "Most engaging post",
+        "value": "\"5 Ways to Scale...\" (2.3K likes)",
+        "icon": "🔥"
+      }
+    ],
+    "transition": {
+      "message": "Based on this, I have some suggestions to help you reach your goal! 🎯",
+      "delay": 1000
+    }
+  },
+  "goalSuggestions": [
+    {
+      "id": "new-follower-dm",
+      "title": "Send course link to new followers",
+      "description": "Automatically send a welcome message with your course link to everyone who follows you.",
+      "benefits": [
+        "Convert followers into customers immediately",
+        "Save time on manual outreach",
+        "Increase course enrollment by ~30%"
+      ],
+      "question": "Do you want to start sending your course link to every new follower?",
+      "actions": ["Approve", "Edit", "Reject"],
+      "mockConversation": {
+        "title": "Preview: New follower conversation",
+        "messages": [
+          {
+            "type": "ai",
+            "text": "Hey! Thanks for following! 🎉",
+            "timestamp": "Just now"
+          },
+          {
+            "type": "ai",
+            "text": "I help entrepreneurs scale their businesses. I've created a course that covers everything I've learned.",
+            "timestamp": "Just now"
+          },
+          {
+            "type": "ai",
+            "text": "Check it out here: [Your Course Link] 🚀",
+            "timestamp": "Just now"
+          },
+          {
+            "type": "user",
+            "text": "Thanks! This looks great!",
+            "timestamp": "1m ago"
+          }
+        ]
+      }
+    },
+    {
+      "id": "viral-post-comments",
+      "title": "Reply to comments on viral post",
+      "description": "Your recent post went viral! (Congrats! 🎉) Automatically reply to comments with a relevant link.",
+      "benefits": [
+        "Capitalize on viral momentum",
+        "Engage with every commenter",
+        "Drive traffic while the post is hot"
+      ],
+      "question": "Your recent post went viral! Do you want to set up sending the link to everyone who comments?",
+      "actions": ["Approve", "Edit", "Reject"],
+      "mockConversation": {
+        "title": "Preview: Comment reply",
+        "messages": [
+          {
+            "type": "user",
+            "text": "Love this content! Where can I learn more?",
+            "timestamp": "2m ago"
+          },
+          {
+            "type": "ai",
+            "text": "So glad you enjoyed it! I dive deeper into this in my course.",
+            "timestamp": "Just now"
+          },
+          {
+            "type": "ai",
+            "text": "Check it out here: [Your Course Link] 📚",
+            "timestamp": "Just now"
+          }
+        ]
+      }
+    },
+    {
+      "id": "faq-handler",
+      "title": "Answer frequently asked questions",
+      "description": "You get lots of questions about your course. Let me help you handle those automatically.",
+      "benefits": [
+        "Save hours of time each week",
+        "Provide instant responses 24/7",
+        "Never miss a potential customer"
+      ],
+      "question": "You get lots of questions about your course. Do you want me to help you handle those?",
+      "subtitle": "I'll reply based on the info we found",
+      "actions": ["Yes, set it up", "Not now"],
+      "setupFlow": {
+        "steps": [
+          {
+            "id": "parse-link",
+            "message": "Great! Give me a link to your course page or any documentation, and I'll learn everything about it.",
+            "placeholder": "https://yourcourse.com",
+            "button": "Parse info"
+          },
+          {
+            "id": "parsing",
+            "message": "Reading your course information...",
+            "steps": [
+              "Scanning course page...",
+              "Extracting key information...",
+              "Learning about pricing and features...",
+              "Preparing AI responses..."
+            ]
+          },
+          {
+            "id": "parsed-success",
+            "message": "Perfect! I've learned everything about your course.",
+            "summary": {
+              "title": "Course: Scale Your Business in 90 Days",
+              "price": "$497",
+              "topics": ["Marketing", "Sales", "Growth Strategies", "Automation"],
+              "includes": ["12 video modules", "Workbooks", "Private community access"]
+            }
+          }
+        ],
+        "actions": ["Approve", "Edit", "Reject"]
+      },
+      "mockConversation": {
+        "title": "Preview: FAQ conversation",
+        "messages": [
+          {
+            "type": "user",
+            "text": "How much does your course cost?",
+            "timestamp": "3m ago"
+          },
+          {
+            "type": "ai",
+            "text": "Great question! My course is $497 and includes 12 comprehensive video modules, workbooks, and access to our private community.",
+            "timestamp": "Just now"
+          },
+          {
+            "type": "ai",
+            "text": "You'll learn everything about marketing, sales, and growth strategies. Want the link?",
+            "timestamp": "Just now"
+          },
+          {
+            "type": "user",
+            "text": "Yes please!",
+            "timestamp": "Just now"
+          },
+          {
+            "type": "ai",
+            "text": "Here you go: [Your Course Link] 🎓",
+            "timestamp": "Just now"
+          }
+        ]
+      }
+    }
+  ],
+  "setupComplete": {
+    "messages": [
+      {
+        "id": "complete-1",
+        "text": "Awesome! We've set up 3 powerful automations for you. 🎉",
+        "delay": 500
+      },
+      {
+        "id": "complete-2",
+        "text": "I recommend we stop here for today and let these go live.",
+        "delay": 1000
+      },
+      {
+        "id": "complete-3",
+        "text": "I'll work my magic and update you tomorrow about how it's going!",
+        "delay": 800
+      }
+    ],
+    "notification": {
+      "question": "Want me to send you a notification tomorrow with your results?",
+      "options": [
+        {
+          "id": "yes",
+          "label": "Yes, keep me updated! 📱"
+        },
+        {
+          "id": "later",
+          "label": "I'll check back later"
+        }
+      ]
+    },
+    "finalMessage": {
+      "text": "Perfect! Your AI is now live and working for you. Talk tomorrow! 👋",
+      "delay": 800
+    }
+  },
+  "ui": {
+    "buttons": {
+      "approve": "✓ Approve",
+      "edit": "✏️ Edit",
+      "reject": "✗ Not now",
+      "continue": "Continue",
+      "back": "← Back",
+      "next": "Next →"
+    },
+    "status": {
+      "typing": "AI is typing...",
+      "thinking": "Thinking...",
+      "loading": "Loading..."
+    }
+  }
+}

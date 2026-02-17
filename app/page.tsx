@@ -1,20 +1,5 @@
-"use client"
-
-import { useState } from "react"
-import { ConnectScreen } from "./components/ConnectScreen"
-import { LoadingScreen } from "./components/LoadingScreen"
+import { Day0Flow } from "./components/Day0Flow"
 
 export default function Home() {
-  const [showLoading, setShowLoading] = useState(false)
-
-  const handleConnect = () => {
-    setShowLoading(true)
-  }
-
-  return (
-    <>
-      {!showLoading && <ConnectScreen onConnect={handleConnect} />}
-      {showLoading && <LoadingScreen />}
-    </>
-  )
+  return <Day0Flow />
 }
