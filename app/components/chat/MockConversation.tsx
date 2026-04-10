@@ -1,7 +1,7 @@
 import { ChatMessage } from './ChatMessage'
 
 interface Message {
-  type: 'ai' | 'user'
+  type: string  // accepts 'ai' | 'user' from JSON (TypeScript infers string from JSON imports)
   text: string
   timestamp: string
 }

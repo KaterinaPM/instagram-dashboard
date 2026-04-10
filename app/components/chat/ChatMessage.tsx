@@ -1,6 +1,6 @@
 interface ChatMessageProps {
   text: string
-  type: 'ai' | 'user'
+  type: string
   timestamp?: string
   isTyping?: boolean
 }
