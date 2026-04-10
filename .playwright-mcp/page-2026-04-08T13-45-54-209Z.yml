@@ -1,0 +1,22 @@
+- generic [active] [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e7] [cursor=pointer]:
+    - img [ref=e8]
+  - alert [ref=e11]
+  - generic [ref=e13]:
+    - img [ref=e16]
+    - generic [ref=e18]:
+      - heading "Instagram Dashboard" [level=1] [ref=e19]
+      - paragraph [ref=e20]: Connect your Instagram Business or Creator account to view your analytics, track performance, and get AI-powered reel suggestions.
+      - link "Connect with Instagram" [ref=e21] [cursor=pointer]:
+        - /url: /api/instagram/auth
+      - generic [ref=e22]:
+        - paragraph [ref=e23]: Requirements
+        - generic [ref=e27]: Instagram Business or Creator account
+        - generic [ref=e31]: Facebook Page connected to your Instagram
+        - generic [ref=e35]: Meta Developer app with Graph API access
+      - paragraph [ref=e36]:
+        - text: Copy
+        - code [ref=e37]: .env.local.example
+        - text: to
+        - code [ref=e38]: .env.local
+        - text: and add your Meta App credentials.
