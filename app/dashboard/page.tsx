@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { ConnectInstagram } from '@/app/components/dashboard/ConnectInstagram'
 import { ProfileHeader } from '@/app/components/dashboard/ProfileHeader'
@@ -41,7 +41,7 @@ type Tab = 'reels' | 'overview' | 'posts' | 'audience' | 'comments'
 
 const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000
 
-export default function DashboardPage() {
+function DashboardContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
 
@@ -259,5 +259,13 @@ export default function DashboardPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<div style={{ minHeight: "100vh", background: "#0a0a0a" }} />}>
+      <DashboardContent />
+    </Suspense>
   )
 }
