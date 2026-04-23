@@ -13,6 +13,7 @@ import { PostsGrid } from '@/app/components/dashboard/PostsGrid'
 import { AudienceInsights } from '@/app/components/dashboard/AudienceInsights'
 import { CommentsView } from '@/app/components/dashboard/CommentsView'
 import { AccountSwitcher, type AccountMeta } from '@/app/components/dashboard/AccountSwitcher'
+import { GrowthAdvisor } from '@/app/components/dashboard/GrowthAdvisor'
 
 interface IGProfile {
   id: string; name: string; username: string; biography: string
@@ -37,7 +38,7 @@ interface MediaWithComments {
   comments: { id: string; text: string; timestamp: string; username: string; replies?: { data: { id: string; text: string; timestamp: string; username: string }[] } }[]
 }
 
-type Tab = 'reels' | 'overview' | 'posts' | 'audience' | 'comments'
+type Tab = 'reels' | 'overview' | 'posts' | 'audience' | 'comments' | 'strategy'
 
 const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000
 
@@ -181,6 +182,7 @@ function DashboardContent() {
     { key: 'overview', label: '📊 Overview' },
     { key: 'audience', label: '👥 Audience' },
     { key: 'comments', label: '💬 Comments' },
+    { key: 'strategy', label: '🎯 Strategy' },
     { key: 'posts',    label: '🖼 Posts' },
   ]
 
@@ -252,6 +254,10 @@ function DashboardContent() {
 
         {activeTab === 'comments' && (
           <CommentsView data={comments} loading={commentsLoading} error={commentsError} />
+        )}
+
+        {activeTab === 'strategy' && (
+          <GrowthAdvisor media={media} insights={insights} audience={audience} profile={profile} />
         )}
 
         {activeTab === 'posts' && (
