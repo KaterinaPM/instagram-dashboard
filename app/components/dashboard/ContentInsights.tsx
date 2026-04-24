@@ -171,14 +171,18 @@ export function ContentInsights({ media }: { media: IGMedia[] }) {
         <div style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 16, padding: '20px 24px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
           <div style={{ fontSize: 14, fontWeight: 600, color: '#111827', marginBottom: 4 }}>Caption length vs interactions</div>
           <div style={{ fontSize: 12, color: '#9ca3af', marginBottom: 16 }}>Do longer captions drive more engagement?</div>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-end', height: 90 }}>
+          <div style={{ display: 'flex', gap: 12 }}>
             {captionData.map(c => {
               const h = c.avg > 0 ? Math.max((c.avg / maxCap) * 75, 6) : 4
               const isBest = c.label === bestCaption.label && c.count > 0
               return (
-                <div key={c.label} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: isBest ? '#10b981' : '#9ca3af' }}>{c.count > 0 ? fmt(c.avg) : '—'}</div>
-                  <div style={{ width: '100%', height: h, borderRadius: 6, background: isBest ? '#10b981' : c.count ? '#a7f3d0' : '#f3f4f6' }} />
+                <div key={c.label} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                  {/* Fixed-height bar area — number sits just above its bar */}
+                  <div style={{ height: 90, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: 4, width: '100%' }}>
+                    <div style={{ fontSize: 11, fontWeight: 700, color: isBest ? '#10b981' : '#9ca3af' }}>{c.count > 0 ? fmt(c.avg) : '—'}</div>
+                    <div style={{ width: '100%', height: h, borderRadius: 6, background: isBest ? '#10b981' : c.count ? '#a7f3d0' : '#f3f4f6' }} />
+                  </div>
+                  {/* Labels below the bar area */}
                   <div style={{ fontSize: 10, color: '#9ca3af', textAlign: 'center', lineHeight: 1.3 }}>{c.label}</div>
                   <div style={{ fontSize: 10, color: '#d1d5db' }}>{c.count} reels</div>
                 </div>

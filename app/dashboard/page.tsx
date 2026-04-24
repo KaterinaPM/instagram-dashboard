@@ -48,6 +48,7 @@ function DashboardContent() {
 
   const [loading, setLoading]         = useState(true)
   const [connected, setConnected]     = useState(false)
+  const [isDemo, setIsDemo]           = useState(false)
   const [profile, setProfile]         = useState<IGProfile | null>(null)
   const [media, setMedia]             = useState<IGMedia[]>([])
   const [insights, setInsights]       = useState<IGInsights | null>(null)
@@ -73,7 +74,19 @@ function DashboardContent() {
       ])
 
       if (profileRes.status === 401) {
-        setConnected(false)
+        // Not logged in — try public demo data
+        const publicRes = await fetch('/api/instagram/public-data')
+        if (publicRes.ok) {
+          const { profile: pub, media: pubMedia, insights: pubInsights, audience: pubAudience } = await publicRes.json()
+          setProfile(pub)
+          setMedia(pubMedia || [])
+          setInsights(pubInsights)
+          setAudience(pubAudience)
+          setIsDemo(true)
+          setConnected(true)
+        } else {
+          setConnected(false)
+        }
         setLoading(false)
         return
       }
@@ -82,6 +95,7 @@ function DashboardContent() {
       const profileData: IGProfile = await profileRes.json()
       setProfile(profileData)
       setConnected(true)
+      setIsDemo(false)
 
       if (accountsRes.ok) {
         const { accounts: accs, activeAccountId: activeId } = await accountsRes.json()
@@ -188,6 +202,22 @@ function DashboardContent() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#f9fafb' }}>
+      {/* Demo banner */}
+      {isDemo && (
+        <div style={{ background: 'linear-gradient(90deg, #7c3aed, #ec4899)', padding: '10px 24px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}>
+          <span style={{ color: '#fff', fontSize: 13, fontWeight: 500 }}>
+            👀 You&apos;re viewing <strong>@{profile?.username}&apos;s</strong> real Instagram analytics — as a demo
+          </span>
+          <a href="/api/instagram/auth" style={{
+            background: '#fff', color: '#7c3aed', fontSize: 12, fontWeight: 700,
+            padding: '5px 14px', borderRadius: 99, textDecoration: 'none',
+            whiteSpace: 'nowrap',
+          }}>
+            Connect your own Instagram →
+          </a>
+        </div>
+      )}
+
       {/* Nav */}
       <div style={{ background: '#fff', borderBottom: '1px solid #e5e7eb', position: 'sticky', top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 56, display: 'flex', alignItems: 'center', gap: 24 }}>
@@ -208,13 +238,21 @@ function DashboardContent() {
           </div>
 
           <div style={{ flexShrink: 0 }}>
-            <AccountSwitcher
-              accounts={accounts}
-              activeAccountId={activeAccountId}
-              onSwitch={handleSwitch}
-              onAddAccount={handleAddAccount}
-              onLogout={handleLogout}
-            />
+            {isDemo ? (
+              <a href="/api/instagram/auth" style={{
+                display: 'inline-block', padding: '6px 16px', borderRadius: 20,
+                background: 'linear-gradient(90deg, #7c3aed, #ec4899)',
+                color: '#fff', fontSize: 13, fontWeight: 600, textDecoration: 'none',
+              }}>Connect your Instagram</a>
+            ) : (
+              <AccountSwitcher
+                accounts={accounts}
+                activeAccountId={activeAccountId}
+                onSwitch={handleSwitch}
+                onAddAccount={handleAddAccount}
+                onLogout={handleLogout}
+              />
+            )}
           </div>
         </div>
       </div>
