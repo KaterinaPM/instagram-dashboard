@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Manychat AI Onboarding",
-  description: "Get started with Manychat AI",
+  title: "Instagram Dashboard",
+  description: "Instagram analytics dashboard",
 }
 
 export default function RootLayout({

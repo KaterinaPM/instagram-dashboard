@@ -1,5 +1,5 @@
-import { AppContainer } from "./components/AppContainer"
+import { redirect } from 'next/navigation'
 
 export default function Home() {
-  return <AppContainer />
+  redirect('/dashboard')
 }
